@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import objectAssign from 'object-assign';
+// import objectAssign from 'object-assign';
 import Swipe from './swipe';
 
 class ReactSwipe extends Component {
@@ -104,7 +104,7 @@ class ReactSwipe extends Component {
             }
 
             const childStyle = child.props.style ?
-              objectAssign({}, style.child, child.props.style) :
+              Object.assign({}, style.child, child.props.style) :
               style.child;
 
             return React.cloneElement(child, {style: childStyle});
