@@ -1,10 +1,26 @@
 {
   "name": "mw-carousel",
+  "description": "react carousel or swipe",
+  "main": "index.js",
+  "author": {
+    "name": "Edward Qiu",
+    "email": "bazingaedward@gmail.com"
+  },
   "license": "MIT",
   "version": "0.1.2",
+  "keywords": [
+    "react",
+    "carousel",
+    "swipe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bazingaedward/mw-carousel.git"
+  },
+  "scripts": {},
   "dependencies": {
     "object-assign": "^4.1.1",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2"
-  },
-  "scripts": {}
+  }
 }
