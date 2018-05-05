@@ -1,8 +1,7 @@
 /*
  * Swipe 2.0.0
- * Brad Birdsall
- * https://github.com/thebird/Swipe
- * Copyright 2013-2015, MIT License
+ * Author: Brad Birdsall, Edward qiu
+ * Copyright 2013-2018, MIT License
  *
 */
 
@@ -13,7 +12,7 @@
         root.Swipe = factory();
     }
 }(this, function () {
-  'use strict';
+  // 'use strict';
 
   return function Swipe (container, options) {
     // utilities
@@ -23,7 +22,7 @@
     // check browser capabilities
     var browser = {
       addEventListener: !!window.addEventListener,
-      touch: ('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch,
+      touch: ('ontouchstart' in window) || (window.DocumentTouch && document instanceof window.DocumentTouch),
       transitions: (function(temp) {
         var props = ['transitionProperty', 'WebkitTransition', 'MozTransition', 'OTransition', 'msTransition'];
         for ( var i in props ) if (temp.style[ props[i] ] !== undefined) return true;
@@ -116,7 +115,7 @@
     function slide(to, slideSpeed) {
 
       // do nothing if already on requested slide
-      if (index == to) return;
+      if (index === to) return;
 
       if (browser.transitions) {
 
@@ -176,7 +175,7 @@
       style.OTransitionDuration =
       style.transitionDuration = speed + 'ms';
 
-      style.webkitTransform = 'translate(' + dist + 'px,0)' + 'translateZ(0)';
+      style.webkitTransform = ['translate(', dist, 'px,0)', 'translateZ(0)'].join();
       style.msTransform =
       style.MozTransform =
       style.OTransform = 'translateX(' + dist + 'px)';
@@ -205,7 +204,8 @@
 
           if (delay) begin();
 
-          options.transitionEnd && options.transitionEnd.call(event, index, slides[index]);
+
+          // options.transitionEnd && options.transitionEnd.call(event, index, slides[index]);
 
           clearInterval(timer);
           return;
@@ -256,6 +256,8 @@
           case 'otransitionend':
           case 'transitionend': offloadFn(this.transitionEnd(event)); break;
           case 'resize': offloadFn(setup); break;
+          default: 
+            break;
         }
 
         if (options.stopPropagation) event.stopPropagation();
@@ -291,7 +293,7 @@
       move: function(event) {
 
         // ensure swiping with one touch and not pinching
-        if ( event.touches.length > 1 || event.scale && event.scale !== 1) return;
+        if ( event.touches.length > 1 || (event.scale && event.scale !== 1)) return;
 
         if (options.disableScroll) return;
 
@@ -304,7 +306,7 @@
         };
 
         // determine if scrolling test has run - one time test
-        if ( typeof isScrolling == 'undefined') {
+        if ( typeof isScrolling === 'undefined') {
           isScrolling = !!( isScrolling || Math.abs(delta.x) < Math.abs(delta.y) );
         }
 
@@ -328,9 +330,8 @@
 
             delta.x =
               delta.x /
-                ( (!index && delta.x > 0 ||         // if first slide and sliding left
-                  index == slides.length - 1 &&     // or if last slide and sliding right
-                  delta.x < 0                       // and if sliding at all
+                ( ((!index && delta.x > 0) ||         // if first slide and sliding left
+                  (index === slides.length - 1 && delta.x < 0)                      
                 ) ?
                 ( Math.abs(delta.x) / width + 1 )      // determine resistance level
                 : 1 );                                 // no resistance if false
@@ -352,14 +353,14 @@
 
         // determine if slide attempt triggers next/prev slide
         var isValidSlide =
-              Number(duration) < 250 &&         // if slide duration is less than 250ms
-              Math.abs(delta.x) > 20 ||         // and if slide amt is greater than 20px
+              (Number(duration) < 250 &&         // if slide duration is less than 250ms
+              Math.abs(delta.x) > 20) ||         // and if slide amt is greater than 20px
               Math.abs(delta.x) > width/2;      // or if slide amt is greater than half the width
 
         // determine if slide attempt is past start and end
         var isPastBounds =
-              !index && delta.x > 0 ||                      // if first slide and slide amt is greater than 0
-              index == slides.length - 1 && delta.x < 0;    // or if last slide and slide amt is less than 0
+              (!index && delta.x > 0) ||                      // if first slide and slide amt is greater than 0
+              (index === slides.length - 1 && delta.x < 0);    // or if last slide and slide amt is less than 0
 
         if (continuous) isPastBounds = false;
 
@@ -431,7 +432,7 @@
       },
       transitionEnd: function(event) {
 
-        if (parseInt(event.target.getAttribute('data-index'), 10) == index) {
+        if (parseInt(event.target.getAttribute('data-index'), 10) === index) {
 
           if (delay) begin();
 
