@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import objectAssign from 'object-assign';
-import Swipe from 'swipe-js-iso';
+import Swipe from './swipe';
 
 class ReactSwipe extends Component {
   static propTypes = {

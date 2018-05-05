@@ -18,9 +18,9 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _swipeJsIso = require('swipe-js-iso');
+var _swipe2 = require('./swipe');
 
-var _swipeJsIso2 = _interopRequireDefault(_swipeJsIso);
+var _swipe3 = _interopRequireDefault(_swipe2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45,7 +45,7 @@ var ReactSwipe = function (_Component) {
       var swipeOptions = this.props.swipeOptions;
 
 
-      this.swipe = (0, _swipeJsIso2.default)(this.container, swipeOptions);
+      this.swipe = (0, _swipe3.default)(this.container, swipeOptions);
     }
   }, {
     key: 'componentDidUpdate',
@@ -57,7 +57,7 @@ var ReactSwipe = function (_Component) {
 
       if (prevProps.childCount !== childCount) {
         this.swipe.kill();
-        this.swipe = (0, _swipeJsIso2.default)(this.container, swipeOptions);
+        this.swipe = (0, _swipe3.default)(this.container, swipeOptions);
       }
     }
   }, {
