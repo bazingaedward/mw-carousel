@@ -4,12 +4,12 @@ const env = process.env.NODE_ENV || 'development';
 
 const webpack = require('webpack');
 const path = require('path');
-const webpackUMDExternal = require('webpack-umd-external');
+// const webpackUMDExternal = require('webpack-umd-external');
 
 const pluginsList = [];
 const outputFileName = env === 'production' ?
-  'react-swipe.min.js' :
-  'react-swipe.js';
+  'mw-carousel.min.js' :
+  'mw-carousel.js';
 
 if (env === 'production') {
   pluginsList.push(
@@ -26,15 +26,15 @@ const config = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: outputFileName,
-    library: 'ReactSwipe',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    // library: 'ReactSwipe',
+    // libraryTarget: 'umd',
+    // umdNamedDefine: true
   },
 
-  externals: webpackUMDExternal({
-    'react': 'React',
-    'swipe-js-iso': 'Swipe'
-  }),
+  // externals: webpackUMDExternal({
+    // 'react': 'React',
+    // 'swipe-js-iso': 'Swipe'
+  // }),
 
   resolve: {
     extensions: ['.js', '.jsx']

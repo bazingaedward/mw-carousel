@@ -1,7 +1,7 @@
 {
   "name": "mw-carousel",
   "description": "react carousel or swipe",
-  "main": "index.js",
+  "main": "lib/reactSwipe.js",
   "author": {
     "name": "Edward Qiu",
     "email": "bazingaedward@gmail.com"
@@ -18,7 +18,6 @@
     "url": "git://github.com/bazingaedward/mw-carousel.git"
   },
   "dependencies": {
-    "object-assign": "^4.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.3.2"
   },
