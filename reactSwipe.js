@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Swipe from './swipe2';
+import Swipe from './swipe';
 
 class ReactSwipe extends Component {
   static propTypes = {
@@ -96,7 +96,7 @@ class ReactSwipe extends Component {
     return (
       <div ref={container => this.container = container} id={id} className={`react-swipe-container ${className}`} style={style.container}>
         <div style={style.wrapper}>
-          {React.Children.map(children, (child) => {
+          {children.map((child) => {
 
             if (!child) {
               return null;
