@@ -49,11 +49,11 @@ var ReactSwipe = function (_Component) {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             var _props = this.props,
-                childCount = _props.childCount,
+                children = _props.children,
                 swipeOptions = _props.swipeOptions;
 
 
-            if (prevProps.childCount !== childCount) {
+            if (prevProps.children.length !== children.length) {
                 this.swipe.kill();
                 this.swipe = new _swipe3.default(this.container, swipeOptions);
             }
@@ -111,8 +111,7 @@ var ReactSwipe = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { style: style.wrapper },
-                    children.map(function (child) {
-
+                    _react2.default.Children.map(children, function (child) {
                         if (!child) {
                             return null;
                         }
@@ -147,8 +146,7 @@ ReactSwipe.propTypes = {
         child: _propTypes2.default.object
     }),
     id: _propTypes2.default.string,
-    className: _propTypes2.default.string,
-    childCount: _propTypes2.default.number
+    className: _propTypes2.default.string
 };
 
 ReactSwipe.defaultProps = {
@@ -172,8 +170,7 @@ ReactSwipe.defaultProps = {
             transitionProperty: 'transform'
         }
     },
-    className: '',
-    childCount: 0
+    className: ''
 };
 
 exports.default = ReactSwipe;

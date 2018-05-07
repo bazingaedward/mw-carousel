@@ -124,12 +124,13 @@ class Swipe {
                     self._stop();
 
                     // increase resistance if first or last slide
-                    if (self.continuous) { // we don't add resistance at the end
+                    if (self.continuous ) { // we don't add resistance at the end
 
                         self._translate(self._circle(self.index - 1), self.delta.x + self.slidePos[self._circle(self.index - 1)], 0);
                         self._translate(self.index, self.delta.x + self.slidePos[self.index], 0);
                         self._translate(self._circle(self.index + 1), self.delta.x + self.slidePos[self._circle(self.index + 1)], 0);
 
+                        
                     } else {
 
                         self.delta.x =
@@ -179,34 +180,29 @@ class Swipe {
 
                         if (direction) {
 
-                            if (self.slides.length > 2) {
+                            if (self.continuous) { // we need to get the next in this direction in place
 
-                                if (self.continuous) { // we need to get the next in this direction in place
+                                self._move(self._circle(self.index - 1), -self.width, 0);
+                                self._move(self._circle(self.index + 2), self.width, 0);
 
-                                    self._move(self._circle(self.index - 1), -self.width, 0);
-                                    self._move(self._circle(self.index + 2), self.width, 0);
-
-                                } else {
-                                    self._move(self.index - 1, -self.width, 0);
-                                }
+                            } else {
+                                self._move(self.index - 1, -self.width, 0);
                             }
-                            
 
+                            
                             self._move(self.index, self.slidePos[self.index] - self.width, self.speed);
                             self._move(self._circle(self.index + 1), self.slidePos[self._circle(self.index + 1)] - self.width, self.speed);
                             self.index = self._circle(self.index + 1);
 
                         } else {
 
-                            if (self.slides.length > 2) {
-                                if (self.continuous) { // we need to get the next in this direction in place
+                            if (self.continuous) { // we need to get the next in this direction in place
 
-                                    self._move(self._circle(self.index + 1), self.width, 0);
-                                    self._move(self._circle(self.index - 2), -self.width, 0);
+                                self._move(self._circle(self.index + 1), self.width, 0);
+                                self._move(self._circle(self.index - 2), -self.width, 0);
 
-                                } else {
-                                    self._move(self.index + 1, self.width, 0);
-                                }
+                            } else {
+                                self._move(self.index + 1, self.width, 0);
                             }
 
                             self._move(self.index, self.slidePos[self.index] + self.width, self.speed);
@@ -214,7 +210,8 @@ class Swipe {
                             self.index = self._circle(self.index - 1);
 
                         }
-                        options.callback && options.callback(self.index, self.slides[self.index]);
+                        let index = self.special ? self.index % 2 : self.index;
+                        options.callback && options.callback(index, self.slides[index]);
 
                     } else {
 
@@ -309,11 +306,14 @@ class Swipe {
         this.continuous = this.slides.length < 2 ? false : this.options.continuous;
 
         //special case if two slides
-        // if (this.browser.transitions && this.continuous && this.slides.length < 3) {
-        //   this.element.appendChild(this.slides[0].cloneNode(true));
-        //   this.element.appendChild(this.element.children[1].cloneNode(true));
-        //   this.slides = this.element.children;
-        // }
+        this.special = false;
+        if (this.browser.transitions && this.continuous && this.slides.length < 3) {
+          this.element.appendChild(this.slides[0].cloneNode(true));
+          this.element.appendChild(this.element.children[1].cloneNode(true));
+          this.slides = this.element.children;
+          
+          this.special = true;
+        }
 
         // create an array to store current positions of each slide
         this.slidePos = new Array(this.slides.length);
@@ -402,7 +402,7 @@ class Swipe {
                     (to > this.index ? to : this.index) - diff - 1), this.width * direction, 0);
 
             to = this._circle(to);
-            console.log(this.index, this.width * direction)
+
             this._move(this.index, this.width * direction, slideSpeed || this.speed);
             this._move(to, 0, slideSpeed || this.speed);
 
@@ -418,7 +418,8 @@ class Swipe {
         }
 
         this.index = to;
-        this.offloadFn(this.options.callback && this.options.callback(this.index, this.slides[this.index]));
+        let index = this.special ? this.index % 2 : this.index;
+        this.offloadFn(this.options.callback && this.options.callback(index, this.slides[index]));
     }
 
     _move(index, dist, speed) {

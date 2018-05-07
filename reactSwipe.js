@@ -11,9 +11,9 @@ class ReactSwipe extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { childCount, swipeOptions } = this.props;
+        const { children, swipeOptions } = this.props;
 
-        if (prevProps.childCount !== childCount) {
+        if (prevProps.children.length !== children.length) {
             this.swipe.kill();
             this.swipe = new Swipe(this.container, swipeOptions);
         }
@@ -50,8 +50,7 @@ class ReactSwipe extends Component {
         return (
             <div ref={container => this.container = container} id={id} className={`react-swipe-container ${className}`} style={style.container}>
                 <div style={style.wrapper}>
-                    {children.map((child) => {
-
+                    {React.Children.map(children, (child) => {
                         if (!child) {
                             return null;
                         }
@@ -87,7 +86,6 @@ ReactSwipe.propTypes = {
     }),
     id: PropTypes.string,
     className: PropTypes.string,
-    childCount: PropTypes.number
 }
 
 ReactSwipe.defaultProps = {
@@ -112,7 +110,6 @@ ReactSwipe.defaultProps = {
         }
     },
     className: '',
-    childCount: 0
 };
 
 export default ReactSwipe;
