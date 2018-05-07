@@ -16,7 +16,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _swipe2 = require('./swipe');
+var _swipe2 = require('./swipe2');
 
 var _swipe3 = _interopRequireDefault(_swipe2);
 
