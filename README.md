@@ -25,7 +25,7 @@ npm install mw-carousel
 ```javascript
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ReactSwipe from 'react-swipe';
+import ReactSwipe from 'mw-carousel';
 
 class Carousel extends React.Component {
     render() {
