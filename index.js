@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -29,150 +29,154 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ReactSwipe = function (_Component) {
-  _inherits(ReactSwipe, _Component);
+    _inherits(ReactSwipe, _Component);
 
-  function ReactSwipe() {
-    _classCallCheck(this, ReactSwipe);
+    function ReactSwipe() {
+        _classCallCheck(this, ReactSwipe);
 
-    return _possibleConstructorReturn(this, (ReactSwipe.__proto__ || Object.getPrototypeOf(ReactSwipe)).apply(this, arguments));
-  }
-
-  _createClass(ReactSwipe, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var swipeOptions = this.props.swipeOptions;
-
-
-      this.swipe = new _swipe3.default(this.container, swipeOptions);
+        return _possibleConstructorReturn(this, (ReactSwipe.__proto__ || Object.getPrototypeOf(ReactSwipe)).apply(this, arguments));
     }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      var _props = this.props,
-          childCount = _props.childCount,
-          swipeOptions = _props.swipeOptions;
+
+    _createClass(ReactSwipe, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var swipeOptions = this.props.swipeOptions;
 
 
-      if (prevProps.childCount !== childCount) {
-        this.swipe.kill();
-        this.swipe = (0, _swipe3.default)(this.container, swipeOptions);
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.swipe.kill();
-      this.swipe = void 0;
-    }
-  }, {
-    key: 'next',
-    value: function next() {
-      this.swipe.next();
-    }
-  }, {
-    key: 'prev',
-    value: function prev() {
-      this.swipe.prev();
-    }
-  }, {
-    key: 'slide',
-    value: function slide() {
-      var _swipe;
-
-      (_swipe = this.swipe).slide.apply(_swipe, arguments);
-    }
-  }, {
-    key: 'getPos',
-    value: function getPos() {
-      return this.swipe.getPos();
-    }
-  }, {
-    key: 'getNumSlides',
-    value: function getNumSlides() {
-      return this.swipe.getNumSlides();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var _props2 = this.props,
-          id = _props2.id,
-          className = _props2.className,
-          style = _props2.style,
-          children = _props2.children;
+            this.swipe = new _swipe3.default(this.container, swipeOptions);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            var _props = this.props,
+                childCount = _props.childCount,
+                swipeOptions = _props.swipeOptions;
 
 
-      return _react2.default.createElement(
-        'div',
-        { ref: function ref(container) {
-            return _this2.container = container;
-          }, id: id, className: 'react-swipe-container ' + className, style: style.container },
-        _react2.default.createElement(
-          'div',
-          { style: style.wrapper },
-          children.map(function (child) {
-
-            if (!child) {
-              return null;
+            if (prevProps.childCount !== childCount) {
+                this.swipe.kill();
+                this.swipe = new _swipe3.default(this.container, swipeOptions);
             }
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.swipe.kill();
+            this.swipe = void 0;
+        }
+    }, {
+        key: 'next',
+        value: function next() {
+            this.swipe.next();
+        }
+    }, {
+        key: 'prev',
+        value: function prev() {
+            this.swipe.prev();
+        }
+    }, {
+        key: 'slide',
+        value: function slide() {
+            var _swipe;
 
-            var childStyle = child.props.style ? _extends({}, style.child, child.props.style) : style.child;
+            (_swipe = this.swipe).slide.apply(_swipe, arguments);
+        }
+    }, {
+        key: 'getPos',
+        value: function getPos() {
+            return this.swipe.getPos();
+        }
+    }, {
+        key: 'getNumSlides',
+        value: function getNumSlides() {
+            return this.swipe.getNumSlides();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
 
-            return _react2.default.cloneElement(child, { style: childStyle });
-          })
-        )
-      );
-    }
-  }]);
+            var _props2 = this.props,
+                id = _props2.id,
+                className = _props2.className,
+                style = _props2.style,
+                children = _props2.children;
 
-  return ReactSwipe;
+
+            return _react2.default.createElement(
+                'div',
+                { ref: function ref(container) {
+                        return _this2.container = container;
+                    }, id: id, className: 'react-swipe-container ' + className, style: style.container },
+                _react2.default.createElement(
+                    'div',
+                    { style: style.wrapper },
+                    children.map(function (child) {
+
+                        if (!child) {
+                            return null;
+                        }
+
+                        var childStyle = child.props.style ? _extends({}, style.child, child.props.style) : style.child;
+
+                        return _react2.default.cloneElement(child, { style: childStyle });
+                    })
+                )
+            );
+        }
+    }]);
+
+    return ReactSwipe;
 }(_react.Component);
 
 ReactSwipe.propTypes = {
-  swipeOptions: _propTypes2.default.shape({
-    startSlide: _propTypes2.default.number,
-    speed: _propTypes2.default.number,
-    auto: _propTypes2.default.number,
-    continuous: _propTypes2.default.bool,
-    disableScroll: _propTypes2.default.bool,
-    stopPropagation: _propTypes2.default.bool,
-    swiping: _propTypes2.default.func,
-    callback: _propTypes2.default.func,
-    transitionEnd: _propTypes2.default.func
-  }),
-  style: _propTypes2.default.shape({
-    container: _propTypes2.default.object,
-    wrapper: _propTypes2.default.object,
-    child: _propTypes2.default.object
-  }),
-  id: _propTypes2.default.string,
-  className: _propTypes2.default.string,
-  childCount: _propTypes2.default.number
+    swipeOptions: _propTypes2.default.shape({
+        startSlide: _propTypes2.default.number,
+        speed: _propTypes2.default.number,
+        auto: _propTypes2.default.number,
+        continuous: _propTypes2.default.bool,
+        disableScroll: _propTypes2.default.bool,
+        stopPropagation: _propTypes2.default.bool,
+        swiping: _propTypes2.default.func,
+        callback: _propTypes2.default.func,
+        transitionEnd: _propTypes2.default.func
+    }),
+    style: _propTypes2.default.shape({
+        container: _propTypes2.default.object,
+        wrapper: _propTypes2.default.object,
+        child: _propTypes2.default.object
+    }),
+    id: _propTypes2.default.string,
+    className: _propTypes2.default.string,
+    childCount: _propTypes2.default.number
 };
+
 ReactSwipe.defaultProps = {
-  swipeOptions: {},
-  style: {
-    container: {
-      overflow: 'hidden',
-      visibility: 'hidden',
-      position: 'relative'
-    },
+    swipeOptions: {},
+    style: {
+        container: {
+            overflow: 'hidden',
+            visibility: 'hidden',
+            position: 'relative'
+        },
 
-    wrapper: {
-      overflow: 'hidden',
-      position: 'relative'
-    },
+        wrapper: {
+            overflow: 'hidden',
+            position: 'relative'
+        },
 
-    child: {
-      float: 'left',
-      width: '100%',
-      position: 'relative',
-      transitionProperty: 'transform'
-    }
-  },
-  className: '',
-  childCount: 0
+        child: {
+            float: 'left',
+            width: '100%',
+            position: 'relative',
+            transitionProperty: 'transform'
+        }
+    },
+    className: '',
+    childCount: 0
 };
+
 exports.default = ReactSwipe;
+// module.exports = ReactSwipe;
+
 module.exports = exports['default'];
