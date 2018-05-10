@@ -10,7 +10,7 @@ class Swipe {
 
     constructor(container, options) {
 
-        const self = this;
+        var self = this;
         this.noop = function () { };
         this.offloadFn = function (fn) { setTimeout(fn || self.noop, 0); };
 
