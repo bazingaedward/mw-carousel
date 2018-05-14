@@ -51,6 +51,7 @@
     "build-dist-prod": "NODE_ENV=production webpack --config webpack.config --progress --colors -p",
     "build-demo": "NODE_ENV=production browserify ./demo/index.js -t [ babelify --presets [ es2015 stage-0 react ] --plugins [ transform-object-assign ] ] | uglifyjs -cm > ./demo/bundle.min.js",
     "build-babel": "babel ./reactSwipe.js --out-file index.js",
+    "build-swipe": "babel ./lib/swipe.js --out-file swipe.js",
     "lint": "eslint ./src",
     "lint-dev": "eslint --fix ./src",
     "test": "echo \"Comming soon ;)\" && exit 0"
